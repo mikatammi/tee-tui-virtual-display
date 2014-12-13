@@ -17,5 +17,8 @@
 *.out
 *.app
 
+# Python
+*.pyc
+
 TAs/*
 *.qbs.user
