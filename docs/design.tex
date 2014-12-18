@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{float}
+
+\begin{document}
+
+\title{Design of Trusted User Interface emulator for Open-TEE project}
+\author{Mika Tammi}
+
+\maketitle
+
+\begin{abstract}
+This document describes the architecture and design of Trusted User Interface
+emulator for Open-TEE project.
+\end{abstract}
+
+\section{Introduction}
+
+Trusted User Interface specification is part of GlobalPlatform Device
+Specifications. Intention of this work is to provide implementation of Trusted
+User Interface API to Open-TEE project.
+
+Section 2 briefly describes the architecture from top level.
+
+\section{Architecture}
+
+Open-TEE will be extended to support the GlobalPlatform Trusted User Interface
+API. Essential part of the Open-TEE architecture is the manager process, which
+provides services to Trusted Applications through socket-based IPC mechanism.
+Trusted Applications are running in separate processes.
+
+Virtual Display software will be created for this project. The Virtual Display
+will act as a display screen for the Trusted User Interface API functionality
+in the emulation process. The display will be configurable so that it is
+possible to emulate various different kinds of screens that could possibly
+exist in today's mobile devices and different aspects of API functionality.
+Different displays have different properties so it is important to be able to
+test various kinds of displays during development.
+
+% Include architecture block diagram figure
+% fig:architecture_block_diagram
+\input{architecture_block_diagram}
+
+The manager process of the Open-TEE emulator will be extended so that it
+provides communication between the Trusted Application, that wants to use
+functionality provided by the Trusted User Interface API, and the Virtual
+Display software, acting as a kind of a router. Communication to Virtual
+Display is provided through socket-based interface. Manager will create the
+socket and listen to it, and the Virtual Display will then connect to that.
+
+Figure \ref{fig:architecture_block_diagram} shows the top-level architecture of
+Open-TEE. Labeled boxes represent different processes or applications and lines
+between boxes represent socket connections. Manager process acts as a router
+for different processes, routing inter-process call messages from process to
+another. The reason for this kind of design is that the Trusted Applications
+are isolated from each other. If one Trusted Application crashes or starts to
+create problems, it doesn't necessarily bring the whole Open-TEE environment
+down.
+
+\section{Design}
+
+The Trusted User Interface API implementation consists of few components:
+\begin{itemize}
+    \item{Virtual Display software providing the screen for the
+          Trusted User Interface}
+    \item{Manager process extensions: Manager process will be extended so that
+          it listens to virtual display socket, and routes the IPC messages
+          from/to Trusted Application using Trusted User Interface API}
+    \item{Trusted User Interface API that is used to interface towards
+          Trusted Applications}
+\end{itemize}
+
+\subsection{Virtual Display}
+
+Desktop version of Virtual Display will be implemented with Qt Framework.
+Virtual Display will allow different screens to be configured so that it is
+possible to test how Trusted Application would show the User Interface in
+variety of scenarios.
+
+In the Virtual Display, the things that should be customizable are:
+\begin{itemize}
+    \item{Font}
+    \item{Supported orientations: portrait or landscape or both}
+    \item{Duration for session timeout}
+    \item{Display size and reported pixel-per-inch resolution}
+    \item{Maximum number of entry fields}
+    \item{Default color for label}
+    \item{Can image and text be customized for each individual button type}
+\end{itemize}
+
+User interface for the Virtual Display will be quite simple. There will be a
+main window that shows the context of the Virtual Display, and a preferences
+dialog for changing the settings mentioned above.
+
+\subsection{API for Trusted Applications}
+
+The Trusted User Interface API will be provided as the GlobalPlatform Trusted
+User Inter API -document specifies it. The document specifies a C API to be
+used by Trusted Application.
+
+Trusted User Interface API provides 5 functions for interacting with display.
+Layout functionality is mostly implementation defined, with some possibility
+for customization.
+
+The functions provided are:
+\begin{itemize}
+    \item{Function for checking metrics for the given text}
+    \item{Function for getting information about the display, such as size, how
+          many input fields would fit there, and what is customizable}
+    \item{Function for opening the Trusted User Interface session}
+    \item{Function for closing the Trusted User Interface session}
+    \item{Function for actually displaying the defined layout and getting back
+          the user input}
+\end{itemize}
+
+\subsection{Protocol}
+
+Protocol between Open-TEE emulator and the Virtual Display consists of 10
+different types of messages. There will be request and response message for
+each of the function calls. Request message will be sent to Virtual Display
+from Trusted Application when function is called. Function is then blocked
+until the response is received from Virtual Display.
+
+Basically the request message will contain all the parameters given for Trusted
+User Interface API function in serialized form, and the response will then have
+all the return data.
+
+\section{Testing}
+
+For testing, a stub implementation of both Virtual Display and Open-TEE Manager
+process socket listener will be implemented. This enables easier development of
+the individual components since the whole software stack doesn't need to be run
+at the same time.
+
+Another aspect for testing is about testing the Trusted Applications. The
+Virtual Display stub could also be used to create an automated testing
+environment for Trusted Applications that use the Trusted User Interface API.
+For example, one could create a test set that automatically tests the Trusted
+Application behaviour with various kinds of different display setups.
+
+\section{Summary}
+
+This concludes the design document for Trusted User Interface emulator for
+Open-TEE project. Architecture and design was briefly introduced and this
+document should reflect to the actual implementation of the Trusted User
+Interface API.
+
+\end{document}
