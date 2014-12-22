@@ -94,6 +94,8 @@ uint32_t generate_getscreeninforequest(FILE *stream,
 uint32_t generate_getscreeninforesponse(FILE *stream,
 					TEE_TUIScreenInfo *s)
 {
+	size_t i = 0;
+
 	if (stream == NULL || s == NULL)
 		return 1;
 
@@ -117,7 +119,7 @@ uint32_t generate_getscreeninforesponse(FILE *stream,
 	    fwrite_check(stream, &s->labelHeight, sizeof(s->labelHeight)))
 		return 2;
 
-	for (size_t i = 0; i < 6; ++i) {
+	for (i = 0; i < 6; ++i) {
 		TEE_TUIScreenButtonInfo *b = &(s->buttonInfo[i]);
 		uint32_t buttontext_length = strlen(b->buttonText);
 		uint32_t btn_text_custom = b->buttonTextCustom;
