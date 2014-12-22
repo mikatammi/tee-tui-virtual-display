@@ -1,7 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QCloseEvent>
 #include <QMainWindow>
+#include <QScopedPointer>
+
+#include "settingsdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,8 +19,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void openSettingsDialog();
+    bool close();
+    void closeEvent(QCloseEvent *event);
+
 private:
-    Ui::MainWindow *ui;
+    QScopedPointer <Ui::MainWindow> ui_;
+    SettingsDialog settings_;
 };
 
 #endif // MAINWINDOW_H
