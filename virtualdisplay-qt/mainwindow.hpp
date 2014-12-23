@@ -5,7 +5,7 @@
 #include <QMainWindow>
 #include <QScopedPointer>
 
-#include "settingsdialog.h"
+#include "settingsdialog.hpp"
 
 namespace Ui {
 class MainWindow;

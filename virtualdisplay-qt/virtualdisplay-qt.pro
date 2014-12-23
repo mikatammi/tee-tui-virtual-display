@@ -16,8 +16,8 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     settingsdialog.cpp
 
-HEADERS  += mainwindow.h \
-    settingsdialog.h
+HEADERS  += mainwindow.hpp \
+    settingsdialog.hpp
 
 FORMS    += mainwindow.ui \
     settingsdialog.ui

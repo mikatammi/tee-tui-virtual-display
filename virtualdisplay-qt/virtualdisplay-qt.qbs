@@ -13,10 +13,10 @@ CppApplication {
     files: [
         'main.cpp',
         'mainwindow.cpp',
-        'mainwindow.h',
+        'mainwindow.hpp',
         'mainwindow.ui',
         'settingsdialog.cpp',
-        'settingsdialog.h',
+        'settingsdialog.hpp',
         'settingsdialog.ui'
     ]
 }
