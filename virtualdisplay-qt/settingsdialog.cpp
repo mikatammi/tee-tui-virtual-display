@@ -3,12 +3,11 @@
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SettingsDialog)
+    ui_(new Ui::SettingsDialog)
 {
-    ui->setupUi(this);
+    ui_->setupUi(this);
 }
 
 SettingsDialog::~SettingsDialog()
 {
-    delete ui;
 }

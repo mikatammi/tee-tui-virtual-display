@@ -2,6 +2,7 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
+#include <QScopedPointer>
 
 namespace Ui {
 class SettingsDialog;
@@ -16,7 +17,7 @@ public:
     ~SettingsDialog();
 
 private:
-    Ui::SettingsDialog *ui;
+    QScopedPointer <Ui::SettingsDialog> ui_;
 };
 
 #endif // SETTINGSDIALOG_H
