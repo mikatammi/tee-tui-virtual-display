@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    trusteduiwidget.cpp
 
 HEADERS  += mainwindow.hpp \
-    settingsdialog.hpp
+    settingsdialog.hpp \
+    trusteduiwidget.hpp
 
 FORMS    += mainwindow.ui \
     settingsdialog.ui

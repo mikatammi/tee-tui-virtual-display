@@ -17,6 +17,8 @@ CppApplication {
         'mainwindow.ui',
         'settingsdialog.cpp',
         'settingsdialog.hpp',
-        'settingsdialog.ui'
+        'settingsdialog.ui',
+        'trusteduiwidget.cpp',
+        'trusteduiwidget.hpp'
     ]
 }
