@@ -36,4 +36,30 @@ enum tui_msg_type {
 	TUI_MSGTYPE_DISPLAYSCREEN
 };
 
+/* TUI_MSGTYPE_CHECKTEXTFORMAT request
+ *
+ * - uint32_t text_length
+ * - char text[text_length]
+ */
+
+/* TUI_MSGTYPE_CHECKTEXTFORMAT response */
+struct tui_msg_checktextformat_response {
+	uint32_t return_value;
+	uint32_t width;
+	uint32_t height;
+	uint32_t last_index;
+} __attribute__((aligned));
+
+struct tui_msg_image_hdr {
+	uint32_t width;
+	uint32_t height;
+} __attribute__((aligned));
+
+struct tui_msg_init_session_response {
+} __attribute__((aligned));
+
+struct tui_msg_screen_label {
+
+} __attribute__((aligned));
+
 #endif /* __TUI_PROTOCOL_H__ */
