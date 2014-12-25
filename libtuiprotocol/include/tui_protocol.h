@@ -21,6 +21,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#include "tui_datatypes.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -57,35 +58,6 @@ struct getscreeninforequest {
 	uint32_t orientation;
 	uint32_t entryfield_count;
 };
-
-typedef struct
-{
-	char* buttonText;
-	uint32_t buttonWidth;
-	uint32_t buttonHeight;
-	bool buttonTextCustom;
-	bool buttonImageCustom;
-} TEE_TUIScreenButtonInfo;
-
-#define TEE_TUI_NUMBER_BUTTON_TYPES 6
-
-typedef struct
-{
-	uint32_t grayscaleBitsDepth;
-	uint32_t redBitsDepth;
-	uint32_t greenBitsDepth;
-	uint32_t blueBitsDepth;
-	uint32_t widthInch;
-	uint32_t heightInch;
-	uint32_t maxEntryFields;
-	uint32_t entryFieldLabelWidth;
-	uint32_t entryFieldLabelHeight;
-	uint32_t maxEntryFieldLength;
-	uint8_t labelColor[3];
-	uint32_t labelWidth;
-	uint32_t labelHeight;
-	TEE_TUIScreenButtonInfo buttonInfo[TEE_TUI_NUMBER_BUTTON_TYPES];
-} TEE_TUIScreenInfo;
 
 uint32_t calc_checktextformatrequest_size(struct checktextformatrequest *s);
 

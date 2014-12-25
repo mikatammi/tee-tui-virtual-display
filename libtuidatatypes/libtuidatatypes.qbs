@@ -1,11 +1,8 @@
 import qbs
 
 DynamicLibrary {
-    name: "tuiprotocol"
-
+    name: "tuidatatypes"
     Depends { name: "cpp" }
-    Depends { name: "tuidatatypes" }
-
     cpp.includePaths: ["include"]
 
     destinationDirectory: '.'
@@ -16,7 +13,6 @@ DynamicLibrary {
     }
 
     files: [
-        "include/tui_protocol.h",
-        "src/tui_protocol.c"
+        "include/tui_datatypes.h"
     ]
 }

@@ -2,7 +2,8 @@ import qbs
 
 Project {
     references: [
-        'libtuiprotocol/libtuiprotocol.qbs', 
+        'libtuidatatypes/libtuidatatypes.qbs',
+        'libtuiprotocol/libtuiprotocol.qbs',
         'virtualdisplay-qt/virtualdisplay-qt.qbs'
     ]
 }
